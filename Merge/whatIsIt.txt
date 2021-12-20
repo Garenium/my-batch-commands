@@ -1,0 +1,7 @@
+Merges video and audio files together
+Syntax: merge {video.mp4} {audio.mp3} {output.mp4} 
+Preferably mp4s and mp3s. 
+
+You can also name the output file whatever you want so you don't have to rename after completion.
+For example:
+merge videoName.mp4 audioName.mp3 Whatever.mp4

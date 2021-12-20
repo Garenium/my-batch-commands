@@ -1,0 +1,4 @@
+A much faster alternative to chere.
+Cyg allows you to run cygwin from the current directory without the need of clicking "bash prompt here" at all. For those who are avid cygwin users, this is a must.
+
+Important: If the path above for mintty does not exist, you should look for it and replace the given path provided. Otherwise, you may need to reinstall cygwin :/. 
