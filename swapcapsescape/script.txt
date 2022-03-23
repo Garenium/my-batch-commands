@@ -1,0 +1,6 @@
+1- For Windows, you need AutoHotKey working
+2- Create an .ahk script
+3- Copy paste the following to the .ahk file
+
+Capslock::Esc
+; RAlt::Space is optional
