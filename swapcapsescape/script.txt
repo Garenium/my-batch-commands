@@ -1,6 +1,19 @@
-1- For Windows, you need AutoHotKey working
-2- Create an .ahk script
-3- Copy paste the following to the .ahk file
+For Windows, you need AutoHotKey working
+Create an .ahk script
+Copy paste the following to the .ahk file
 
+Script:
 Capslock::Esc
-; RAlt::Space is optional
+; RAlt::Space (Another example swapping right alt and space)
+
+For Linux, I go to the path /usr/share/X11/xkb/symbols/pc and swap Escape to Caps_Lock from there.
+
+Code:
+Change
+key <ESC>  {	[ Escape			]	};
+To
+key <ESC>  {	[ Caps_Lock			]	};
+
+key <CAPS> {	[ Caps_Lock	]	};
+To
+key <CAPS> {	[ Escape	]	};
