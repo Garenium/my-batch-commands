@@ -1,6 +1,0 @@
-1. the 's' in clips means "source". It allows to copy text-based file extensions (.txt, .c, .py,  etc.) without going inside a file and copy
-from there
-
-- For Windows
-@echo off
-cat %1 | clip
