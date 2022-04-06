@@ -8,13 +8,9 @@ becomes
 clips source.c
 
 - For Windows
-  1. It is recommended to have a directory dedicated to custom commands and append the path to the environment variables (obviously)
-  2. Create a .bat file called clips in the path 
 @echo off
 cat %1 | clip
 
-- For Linux 
-  1. "sudo apt install xclip" first
-  2. make a new script called clips (without .sh extension) in /usr/bin and then chmod +x clips. At least that's what I did)
+- For Linux (Do "sudo apt install xclip" first")
 #!/bin/bash
 cat $1 | xclip -i -selection clipboard
