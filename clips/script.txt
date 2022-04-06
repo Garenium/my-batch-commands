@@ -1,5 +1,20 @@
 The letter 's' stands for source. I wanted clip to copy the contents inside a text-based file. So I thought of making a command by my own.
 
+So something like,
+cat source.c | clip
+
+becomes
+
+clips source.c
+
 - For Windows
+  1. It is recommended to have a directory dedicated to custom commands and append the path to the environment variables (obviously)
+  2. Create a .bat file called clips in the path 
 @echo off
 cat %1 | clip
+
+- For Linux 
+  1. "sudo apt install xclip" first
+  2. make a new script called clips (without .sh extension) in /usr/bin and then chmod +x clips. At least that's what I did)
+#!/bin/bash
+cat $1 | xclip -i -selection clipboard
