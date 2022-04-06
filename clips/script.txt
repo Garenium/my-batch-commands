@@ -1,4 +1,4 @@
-The letter 's' stands for source. I wanted clip to copy the contents inside a text-based file. So I thought of making a command by my own.
+The letter 's' stands for source. I wanted the clip command to copy the contents inside a text-based file. So I thought of making a command on my own.
 
 So something like,
 cat source.c | clip
