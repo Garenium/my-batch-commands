@@ -1,0 +1,12 @@
+Clears screen then lists all the files inside the current working directory
+
+- For Windows
+@echo off
+clear
+ls
+
+- For Linux
+#!/bin/bash
+clear; ls --color
+
+
