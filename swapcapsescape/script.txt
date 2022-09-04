@@ -17,3 +17,6 @@ key <ESC>  {	[ Caps_Lock			]	};
 key <CAPS> {	[ Caps_Lock	]	};
 To
 key <CAPS> {	[ Escape	]	};
+
+Or append this line to ~/.profile
+setxkbmap -option caps:swapescape
