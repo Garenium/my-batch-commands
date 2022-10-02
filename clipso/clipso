@@ -1,0 +1,4 @@
+#!/bin/bash
+xclip -o -selection clipboard >> $1
+
+#Based on clips, but does the opposite (writes/appends to a file from a clipboard).
