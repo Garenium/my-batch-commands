@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Purpose: 
+# To convert markdown to pdf file
+# Requires pandoc
+
+if [ $# -ge 4 ]; then
+    echo "Usage: $0 input_file.md output_file.pdf (\"title\")"
+    exit 1
+fi
+
+if [ "$#" -eq 3 ]
+then
+    echo "Title is \"$3\""
+    pdfTitle="$3"
+else
+    echo "Default title is \"Title\""
+    pdfTitle="Title"
+
+    # pdfTitle=$(grep -m 1 "^#" $1)
+    # echo "First header is \"$pdfTitle\""
+    # echo "The title is $pdfTitle"
+fi 
+
+
+input_file="$1"
+output_file="$2"
+temp_html="output.html"
+    
+
+# Convert Markdown to HTML
+pandoc -f markdown -t html --metadata title="$pdfTitle" "$input_file" -s -o "$temp_html"
+
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to convert Markdown to HTML."
+    exit 1
+fi
+
+# Convert HTML to PDF
+pandoc -f html -t pdf "$temp_html" -o "$output_file"
+
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to convert HTML to PDF."
+    exit 1
+fi
+
+# Clean up temporary HTML file
+rm "$temp_html"
+
+echo "Conversion completed. PDF saved as $output_file."
+
