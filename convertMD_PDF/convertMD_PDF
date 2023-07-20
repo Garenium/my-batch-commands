@@ -17,6 +17,8 @@ else
     echo "Default title is \"Title\""
     pdfTitle="Title"
 
+    #OPTIONAL (If an .md file has only one h1 header. You
+    #may uncomment this
     # pdfTitle=$(grep -m 1 "^#" $1)
     # echo "First header is \"$pdfTitle\""
     # echo "The title is $pdfTitle"
