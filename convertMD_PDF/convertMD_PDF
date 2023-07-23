@@ -9,19 +9,12 @@ if [ $# -ge 4 ]; then
     exit 1
 fi
 
-if [ "$#" -eq 3 ]
-then
+if [ "$#" -eq 3 ]; then
     echo "Title is \"$3\""
     pdfTitle="$3"
 else
     echo "Default title is \"Title\""
     pdfTitle="Title"
-
-    #OPTIONAL (If an .md file has only one h1 header. You
-    #may uncomment this
-    # pdfTitle=$(grep -m 1 "^#" $1)
-    # echo "First header is \"$pdfTitle\""
-    # echo "The title is $pdfTitle"
 fi 
 
 
@@ -32,10 +25,9 @@ temp_html="output.html"
 
 #If it's from a zola website, ignore them
 ignore_zola="temp.md"
-grep -m 1 -o "+++" $1
+grep -m 1 -o "+++" "$1"
 isZola=$?
-if [ $isZola -eq 0 ]
-then
+if [ $isZola -eq 0 ]; then
     startLine=$(grep -n "+++" "$1" | grep -m 2 -o '^[0-9]\+' | tail -n 1)
     startLine=$((startLine + 1))
 
@@ -45,12 +37,11 @@ then
     sed -n "${startLine},${endLine}p" "$1" > "$ignore_zola"
     echo "This is startLine: $startLine"
     echo "This is endLine: $endLine"
-    cat "$ignore_zola"
     input_file="$ignore_zola"
 fi
-    
 
-# Replace U+2006 with a regular space using tr then convert html to pdf
+
+# Replace U+2006 with a regular space using tr then convert from markdown to html
 tr '\x2006' ' ' < "$input_file" | pandoc -f markdown -t html --metadata title="$pdfTitle" -s -o "$temp_html"
 
 if [ $? -ne 0 ]; then
@@ -58,8 +49,12 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+# Add MathJax script to HTML
+sed -i '/<\/head>/i <!-- Add MathJax script -->\n  <script type="text/javascript" async\n    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">\n  </script>' "$temp_html"
+
+
 # Convert HTML to PDF
-pandoc -f html -t pdf --metadata author="Your Name" "$temp_html" -o "$output_file"
+pandoc -f html -t pdf -V geometry:margin=0.5in --metadata author="Garen Ikezian" "$temp_html" -o "$output_file"
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to convert HTML to PDF."
@@ -70,6 +65,3 @@ fi
 rm "$temp_html"
 
 echo "Conversion completed. PDF saved as $output_file."
-
-
-rm "$ignore_zola"
