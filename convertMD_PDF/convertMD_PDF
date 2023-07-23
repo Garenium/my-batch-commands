@@ -50,8 +50,8 @@ then
 fi
     
 
-# Convert Markdown to HTML
-pandoc -f markdown -t html --metadata title="$pdfTitle" "$input_file" -s -o "$temp_html"
+# Replace U+2006 with a regular space using tr then convert html to pdf
+tr '\x2006' ' ' < "$input_file" | pandoc -f markdown -t html --metadata title="$pdfTitle" -s -o "$temp_html"
 
 if [ $? -ne 0 ]; then
     echo "Error: Failed to convert Markdown to HTML."
