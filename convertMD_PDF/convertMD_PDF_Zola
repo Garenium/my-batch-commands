@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Purpose: 
+# To convert markdown to pdf file
+# Requires pandoc
+
+if [ $# -ge 4 ]; then
+    echo "Usage: $0 input_file.md output_file.pdf (\"title\")"
+    exit 1
+fi
+
+if [ "$#" -eq 3 ]; then
+    echo "Title is \"$3\""
+    pdfTitle="$3"
+else
+    echo "Default title is \"Title\""
+    pdfTitle="Title"
+fi 
+
+
+input_file="$1"
+output_file="$2"
+
+#If it's from a zola website, ignore them
+temp_file="temp.md"
+grep -m 1 -o "+++" "$1"
+isZola=$?
+if [ $isZola -eq 0 ]; then
+    startLine=$(grep -n "+++" "$1" | grep -m 2 -o '^[0-9]\+' | tail -n 1)
+    startLine=$((startLine + 1))
+
+    endLine=$(grep -n "<a href=" "$1" | grep -m 1 -o '^[0-9]\+' | tail -n 1)
+    endLine=$((endLine - 1))
+
+cat - $temp_file <<EOT > $temp_file
+---
+    title: $3 
+    author: Your Name
+---
+EOT
+
+    sed -n "${startLine},${endLine}p" "$1" >> "$temp_file"
+    echo "This is startLine: $startLine"
+    echo "This is endLine: $endLine"
+
+    cat $temp_file > content.txt
+
+    cmp $temp_file content.txt || echo "$temp_file and content.txt are different"
+
+    # cat $temp_file
+fi
+
+
+pandoc -f markdown -t pdf -V geometry:margin=0.5in $temp_file -o $output_file
+
+
+rm "$temp_file"
+
+echo "Conversion completed. PDF saved as $output_file."
