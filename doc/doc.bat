@@ -10,3 +10,4 @@
 
 @echo off
 echo "Hello!" | pandoc -o %1.docx
+start .\%1.docx
