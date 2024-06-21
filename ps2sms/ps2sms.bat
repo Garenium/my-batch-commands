@@ -1,7 +1,8 @@
 @echo off
 
 REM This is for converting videos to a compatible format and be viewable on a soft-modded PS2 with the application called SMS (Simple Media System)
-REM Based on https://www.reddit.com/r/crtgaming/comments/sn6uht/comment/hw1azno/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button And https://www.reddit.com/r/ps2/comments/lktv2a/sms_ffmpeg_settings/
+REM Based on https://www.reddit.com/r/crtgaming/comments/sn6uht/comment/hw1azno/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button 
+REM And https://www.reddit.com/r/ps2/comments/lktv2a/sms_ffmpeg_settings/
 
 echo "Converting videos to SMS supported format for the PS2..."
 echo "Passed %1"
